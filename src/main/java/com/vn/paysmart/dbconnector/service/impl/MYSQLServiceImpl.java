@@ -1,6 +1,7 @@
 package com.vn.paysmart.dbconnector.service.impl;
 
 import com.vn.paysmart.dbconnector.common.ExecuteMYSQLUtils;
+import com.vn.paysmart.dbconnector.common.SlackUtils;
 import com.vn.paysmart.dbconnector.connector.MYSQLConnector;
 import com.vn.paysmart.dbconnector.entity.ExecuteMYSQLRequest;
 import com.vn.paysmart.dbconnector.entity.ExecuteMYSQLResponse;
@@ -20,6 +21,8 @@ public class MYSQLServiceImpl implements MYSQLService {
 
     @Autowired
     ExecuteMYSQLUtils mysqlUtils;
+    @Autowired
+    SlackUtils slackUtils;
 
     @Override
     public List<String> getAllSchemaDB() {
@@ -41,6 +44,7 @@ public class MYSQLServiceImpl implements MYSQLService {
         if (!isExecute) {
             return null;
         }
+        slackUtils.sendMessage(infoQuery.getQueryExecute());
         MYSQLConnector.getInstance().executeQuery(infoQuery.getQueryExecute());
         return result;
     }

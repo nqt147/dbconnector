@@ -2,8 +2,6 @@ package com.vn.paysmart.dbconnector.controller;
 
 import com.google.gson.Gson;
 import com.vn.paysmart.dbconnector.entity.ExecuteMYSQLRequest;
-import com.vn.paysmart.dbconnector.entity.ExecuteMYSQLResponse;
-import com.vn.paysmart.dbconnector.service.MYSQLService;
 import com.vn.paysmart.dbconnector.service.impl.MYSQLServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +47,6 @@ public class MYSQLController {
     @RequestMapping(value = "/mysql/update", method = RequestMethod.POST)
     public ResponseEntity<ExecuteMYSQLRequest> updateDB(HttpServletRequest request, @RequestBody ExecuteMYSQLRequest infoQuery) throws SQLException {
         logger.info("Request MYSQL execute: {}", gson.toJson(infoQuery));
-
         List<String> dbNames = new ArrayList<>();
         dbNames.add("sn_operation_tool");
         dbNames.add("sn_reconciliation_tool");
